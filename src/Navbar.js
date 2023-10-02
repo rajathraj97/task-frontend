@@ -7,24 +7,28 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link,Route,Routes } from 'react-router-dom';
+import Login from './Login';
 
 const Navbar = () =>{
-return(
+return(<div>
 <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             TASK-MANAGER
           </Typography>
-          <Link style={{textDecoration:"none"}} to="/login"><Button color="inherit">Login</Button></Link>
+          <Link style={{textDecoration:"none",color:"white"}} to="/login"><Button color="inherit">Login</Button></Link>
         </Toolbar>
       </AppBar>
-    </Box>
+</Box>
+
+    <Routes>
+        <Route path="/login" element={<Login/>}/>  
+    </Routes>
+    </div>
 
 )
 }
-<Routes>
-  
-</Routes>
+
 
 export default Navbar

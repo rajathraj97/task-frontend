@@ -30,15 +30,19 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-const  SignIn = ()=> {
+const Login = ()=> {
+    const[loginData,setLoginData] = React.useState({email:"",password:""})
+
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    
   };
+
+  const handelChange = (e) =>{
+    setLoginData({...loginData,[e.target.name]:e.target.value})
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -63,40 +67,36 @@ const  SignIn = ()=> {
               margin="normal"
               required
               fullWidth
+              value={loginData.email}
               id="email"
               label="Email Address"
               name="email"
               autoComplete="email"
+              onChange={(e)=>{handelChange(e)}}
               autoFocus
             />
             <TextField
               margin="normal"
               required
+              value={loginData.password}
               fullWidth
               name="password"
               label="Password"
               type="password"
               id="password"
+              onChange={(e)=>{handelChange(e)}}
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={()=>{handleSubmit(loginData)}}
             >
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
                   {"Don't have an account? Sign Up"}
@@ -110,3 +110,5 @@ const  SignIn = ()=> {
     </ThemeProvider>
   );
 }
+
+export default Login
