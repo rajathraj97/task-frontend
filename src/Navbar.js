@@ -8,6 +8,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link,Route,Routes } from 'react-router-dom';
 import Login from './Login';
+import SignUp from './SignUp';
+import Home from './Home';
 
 const Navbar = () =>{
 return(<div>
@@ -23,7 +25,8 @@ return(<div>
 </Box>
 
     <Routes>
-        <Route path="/login" element={<Login/>}/>  
+        <Route path="/login" element={localStorage.getItem('token') ? <Login/> : <Home/>}/>  
+        <Route path="/signup" element={<SignUp/>}/>  
     </Routes>
     </div>
 

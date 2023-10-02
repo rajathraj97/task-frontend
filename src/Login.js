@@ -5,13 +5,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Swal from 'sweetalert2'
 
 function Copyright(props) {
   return (
@@ -35,8 +36,26 @@ const Login = ()=> {
 
 
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e,loginData) => {
+    e.preventDefault()
+    if(!(loginData.email.includes('@'))){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'invalid email!',
+            
+          })
+    }
+    if(loginData.password.length < 1){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'password needed',
+            
+          })
+    }else{
+        
+    }
     
   };
 
@@ -92,13 +111,13 @@ const Login = ()=> {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={()=>{handleSubmit(loginData)}}
+              onClick={(e)=>{handleSubmit(e,loginData)}}
             >
               Sign In
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to="/signup">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
